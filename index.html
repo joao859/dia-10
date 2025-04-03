@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .timeline {
+        margin: 20px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+      }
+      .timeline ul {
+        list-style: none;
+        padding: 0;
+      }
+      .timeline li {
+        margin: 10px 0;
+        font-size: 18px;
+      }
+    </style>
+</head>
+<body>
+    <main class="love-page">
+        <header class="header">
+          <h1 class="title">Para a minha amada Isa ❤️</h1>
+          <p class="subtitle">Cada momento com você é um presente</p>
+          <button class="love-counter-btn" onclick="calculateLoveDays()">
+            Te amo há...
+            <span id="love-days-count" class="love-days-count"></span>
+          </button>
+        </header>
+      
+        <section class="content-section" data-el="div-1">
+          <div class="content-wrapper">
+            <article class="photo-column">
+              <img
+                src="/img/foto 2.jpeg"
+                class="main-photo"
+                alt="Love memory photo"
+              />
+            </article>
+      
+            <article class="message-column">
+              <div class="message-container">
+                <h2 class="days-title">
+                  <span>
+                    <template data-el="div-2"><!-- state.daysInLove --></template>
+                  </span>
+                  <span> Dias de Amor❤️</span>
+                </h2>
+                <p class="love-message">
+                  <span>Nossos caminhos terem se cruzado foi a maior sorte da minha vida, e escolher passar todos esses dias com você foi meu maior acerto. Esse site foi feito a mão, especialmente para você se lembrar que nosso amor teve inicio mas não terá um fim </span>
+                  <span>
+                    <template data-el="div-3"><!-- state.daysInLove --></template>
+                  </span>
+                  <span>
+                    .❤️
+                  </span>
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      
+        <section class="gallery-section">
+          <img
+            src="/img/foto1.jpeg"
+            class="gallery-image"
+            alt="Love memory 1"
+          />
+          <img
+            src="/img/foto3.jpeg"
+            class="gallery-image"
+            alt="Love memory 2"
+          />
+        </section>
+
+        <section class="timeline">
+          <h2>Linha do Tempo do Nosso Amor</h2>
+          <ul>
+            <li><strong>09/07/2022:</strong> Quando começamos a sentir algo um pelo outro ⭐</li>
+            <li><strong>13/08/2022:</strong> Nosso primeiro encontro 💐</li>
+            <li><strong>26/09/2022:</strong> Fomos para o interclasse de "casal" 🏐</li>
+            <li><strong>12/10/2022:</strong> Viramos namorados! ❤️</li>
+            <li><strong>24/10/2022:</strong> Dizemos nosso primeiro "Eu te Amo!" 💛</li>
+            <li><strong>31/10/2022:</strong> Fomos de Han Solo e Leia no halloween da escola 🎃</li>
+            <li><strong>10/12/2022:</strong> Fomos para praia seca pela primeira vez 🌞</li>
+            <li><strong>17/12/2022:</strong> Nos formamos na escola juntos 🎓</li>
+            <li><strong>22/01/2023:</strong> Comemoramos meu aniversário juntos pela primeira vez 🎉</li>
+            <li><strong>08/02/2023:</strong> Te levei para comer comida japonesa pela primeira vez no dia das mulheres 🍣</li>
+            <li><strong>26/03/2023:</strong> Fomos no nosso primeiro show juntos 🎤</li>
+            <li><strong>10/05/2023:</strong> Comemoramos o seu primeiro aniversário juntos (duas vezes) 🎈</li>
+            <li><strong>08/07/2023:</strong> Você dormiu na minha casa pela a primeira vez 🛏️</li>
+            <li><strong>04/08/2023:</strong> Viajamos juntos para Penedo 🧳</li>
+            <li><strong>12/10/2023:</strong> Fizemos um ano de namoro e acampamos no terraço ⛺</li>
+            <li><strong>14/04/2024:</strong> Fomos pela primeira vez em um estádio juntos ⚽</li>
+            <li><strong>12/10/2024:</strong> Fomos no centro da cidade comemorar dois anos de namoro 🏛️</li>
+            <li><strong>31/12/2024:</strong> Passamos o ano novo na praia 🎆</li>
+            <li><strong>16/02/2024:</strong> Levamos meus amigos para passear de barco 🚤</li>
+            <li><strong>03/03/2022:</strong> Você tocou violão para mim pela primeira vez 🎸</li>
+            <li><strong>10/05/2025:</strong> Este site foi feito com amor para você 🥰</li>
+          </ul>
+        </section>
+      </main>
+      
+      <script>
+        (() => {
+          // Love counter function
+          function calculateLoveDays() {
+            const startDate = new Date("2022-10-12");
+            const today = new Date();
+            const timeDiff = today - startDate;
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      
+            const daysCounter = document.getElementById("love-days-count");
+            daysCounter.textContent = ` ${daysDiff} dias ❤️`;
+      
+            // Add animation class
+            const btn = document.querySelector(".love-counter-btn");
+            btn.classList.add("counted");
+      
+            // Remove animation class after animation completes
+            setTimeout(() => {
+              btn.classList.remove("counted");
+            }, 1000);
+          }
+      
+          // Make function globally available
+          window.calculateLoveDays = calculateLoveDays;
+      
+          // Calculate initial value
+          calculateLoveDays();
+      
+          // Intersection Observer for animations
+          const observerOptions = {
+            threshold: 0.2,
+            rootMargin: "0px",
+          };
+      
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate");
+                observer.unobserve(entry.target);
+              }
+            });
+          }, observerOptions);
+      
+          // Observe elements
+          document.addEventListener("DOMContentLoaded", () => {
+            const animatedElements = document.querySelectorAll(
+              ".photo-column, .message-column, .gallery-image",
+            );
+            animatedElements.forEach((el) => observer.observe(el));
+          });
+      
+          const state = {
+            daysInLove: 0,
+            calculateDaysInLove() {
+              const startDate = new Date("2022-07-20"); // Replace with your relationship start date
+              const today = new Date();
+              const diff = today - startDate;
+              state.daysInLove = Math.floor(diff / (1000 * 60 * 60 * 24));
+              update();
+            },
+          };
+      
+          let context = null;
+          let nodesToDestroy = [];
+          let pendingUpdate = false;
+      
+          function destroyAnyNodes() {
+            nodesToDestroy.forEach((el) => el.remove());
+            nodesToDestroy = [];
+          }
+      
+          function update() {
+            if (pendingUpdate === true) {
+              return;
+            }
+            pendingUpdate = true;
+      
+            document.querySelectorAll("[data-el='div-1']").forEach((el) => {
+              el.setAttribute("space", 20);
+            });
+      
+            document.querySelectorAll("[data-el='div-2']").forEach((el) => {
+              renderTextNode(el, state.daysInLove);
+            });
+      
+            document.querySelectorAll("[data-el='div-3']").forEach((el) => {
+              renderTextNode(el, state.daysInLove);
+            });
+      
+            destroyAnyNodes();
+      
+            pendingUpdate = false;
+          }
+      
+          function renderTextNode(el, text) {
+            const textNode = document.createTextNode(text);
+            if (el?.scope) {
+              textNode.scope = el.scope;
+            }
+            if (el?.context) {
+              child.context = el.context;
+            }
+            el.after(textNode);
+            nodesToDestroy.push(el.nextSibling);
+          }
+      
+          update();
+          state.calculateDaysInLove();
+      
+          setInterval(
+            () => {
+              state.calculateDaysInLove();
+            },
+            24 * 60 * 60 * 1000,
+          );
+        })();
+      </script>
+</body>
+</html>
